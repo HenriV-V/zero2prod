@@ -10,10 +10,7 @@ pub struct FormData {
     email: String,
 }
 
-pub async fn subscribe(
-    form: web::Form<FormData>,
-    pool: web::Data<PgPool>,
-) -> HttpResponse {
+pub async fn subscribe(form: web::Form<FormData>, pool: web::Data<PgPool>) -> HttpResponse {
     match sqlx::query!(
         r#"insert into subscriptions (id, email, name, subscribed_at)
         values ($1, $2, $3, $4)
